@@ -1,0 +1,39 @@
+@use 'sass:math';
+
+$utilities: (
+        'padding': (
+                'prefix': 'p',
+                'values': (
+                        '100': 100 + px,
+                ),
+        ),
+        'padding-top': (
+                'prefix': 'pt',
+                'values': (
+                        '20': 20 + px,
+                ),
+        ),
+        'margin': (
+                'prefix': 'm',
+                'values': (
+                        '20': 20 + px,
+                ),
+        ),
+        'margin-top': (
+                'prefix': 'mt',
+                'values': (
+                        '20': 20 + px,
+                ),
+        ),
+);
+
+@each $property, $map in $utilities {
+  $prefix: map-get($map, 'prefix');
+  $values: map-get($map, 'values');
+
+  @each $k, $v in $values {
+    .#{$prefix}-#{$k} {
+      #{$property}: $v;
+    }
+  }
+}
