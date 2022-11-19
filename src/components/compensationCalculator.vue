@@ -7,11 +7,13 @@
                       :key="item.id"
                       :type="item.type"
     />
+    <calculator-button title="Calculate"/>
   </div>
 </template>
 
 <script>
 import calculatorInput from "@/components/calculatorInput";
+import calculatorButton from "@/components/calculatorButton";
 
 export default {
   data() {
@@ -31,7 +33,8 @@ export default {
     }
   },
   components: {
-    calculatorInput
+    calculatorInput,
+    calculatorButton
   }
 }
 </script>
