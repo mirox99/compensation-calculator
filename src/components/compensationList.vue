@@ -7,7 +7,7 @@
       </div>
       <img :src="data.image" class="image" alt="">
     </div>
-    <ul class="compensation-list__items ">
+    <ul class="compensation-list__items">
       <li class="list-item description mt-20" v-for="(item,index) in data.list" :key="index">
         {{ item.title }}
         <ul v-if="item.childrenList" class="children-list">
