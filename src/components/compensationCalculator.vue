@@ -7,13 +7,17 @@
                       :key="item.id"
                       :type="item.type"
     />
+    <calculator-checkbox label="I have tuberculosis" id="tuberculosis-check"/>
     <calculator-button title="Calculate"/>
+    <compensation-calculator-result/>
   </div>
 </template>
 
 <script>
 import calculatorInput from "@/components/calculatorInput";
 import calculatorButton from "@/components/calculatorButton";
+import calculatorCheckbox from "@/components/calculatorCheckbox";
+import compensationCalculatorResult from "@/components/compensationCalculatorResult";
 
 export default {
   data() {
@@ -34,7 +38,9 @@ export default {
   },
   components: {
     calculatorInput,
-    calculatorButton
+    calculatorButton,
+    calculatorCheckbox,
+    compensationCalculatorResult
   }
 }
 </script>

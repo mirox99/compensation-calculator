@@ -1,5 +1,5 @@
 <template>
-  <div class="calculator-input">
+  <div class="calculator-input mt-20">
     <label class="f-14" for="id">{{ label }}</label>
     <div class="calculator-input__inner mt-5">
       <input class="input p-10"
