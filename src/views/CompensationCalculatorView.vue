@@ -22,5 +22,14 @@ export default {
   display: flex;
   justify-content: space-between;
 
+  @include mq(tablet) {
+    padding: 50px;
+  }
+  @include mq(tablet-sm) {
+    flex-direction: column;
+  }
+  @include mq(mobile) {
+    padding: 20px;
+  }
 }
 </style>

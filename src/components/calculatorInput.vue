@@ -1,11 +1,12 @@
 <template>
   <div class="calculator-input mt-20">
-    <label class="f-14" for="id">{{ label }}</label>
+    <label class="f-14" :for="id">{{ label }}</label>
     <div class="calculator-input__inner mt-5">
       <input class="input p-10"
              type="number"
              :id="id"
              v-model="model"
+             @input="input"
       >
       <span class="type bold f-18">{{ type }}</span>
     </div>
@@ -28,18 +29,27 @@ export default {
       default: ''
     },
     value: {
-      type: Number,
-      default: 0
+      type: [Number, String],
+    },
+    restrictValue: {
+      type: Function
     }
   },
-  computed: {
-    model: {
-      get() {
-        return this.value
-      },
-      set(newValue) {
-        this.$emit('input', newValue)
-      }
+  data() {
+    return {
+      model: null
+    }
+  },
+  methods: {
+    input() {
+      this.model = this.restrictValue ? this.restrictValue(this.model) : this.model
+
+      this.$emit('input', this.model)
+    }
+  },
+  watch: {
+    value(val) {
+      if (this.model !== val) this.model = val
     }
   }
 }
@@ -51,16 +61,23 @@ export default {
 
   &__inner {
     position: relative;
+    background-image: linear-gradient(white, white), $metalLightGradient;
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+    border: 2px solid transparent;
+    border-radius: 4px;
 
     .input {
       background: transparent;
-      border: 2px solid;
-      border-image-slice: 1;
-      box-shadow: 0 2px 4px 0 #0000001A;
-      border-image-source: $metalLightGradient;
-      border-radius: 4px;
-      height: 50px;
+      height: 46px;
       width: 100%;
+      border: unset;
+      -moz-appearance: textfield;
+
+      &::-webkit-inner-spin-button, &::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
     }
 
     .type {

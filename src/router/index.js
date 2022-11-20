@@ -1,26 +1,24 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+
+let HomeView = () => import( '../views/HomeView.vue')
+let CompensationCalculatorView = () => import( '../views/CompensationCalculatorView.vue')
 
 Vue.use(VueRouter)
 
-const routes = [
-    {
-        path: '/',
-        name: 'home',
-        component: HomeView
-    },
+const routes = [{
+    path: '/',
+    name: 'home',
+    component: HomeView
+},
     {
         path: '/compensation-calculator',
         name: 'compensationCalculator',
-        component: () => import(/* webpackChunkName: "about" */ '../views/compensationCalculatorView.vue')
-    }
-]
+        component: CompensationCalculatorView
+    }]
 
 const router = new VueRouter({
-    mode: 'history',
-    base: process.env.BASE_URL,
-    routes
+    mode: 'history', base: process.env.BASE_URL, routes
 })
 
 export default router

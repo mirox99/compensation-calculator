@@ -1,7 +1,7 @@
 <template>
   <div class="compensation-calculator-content">
     <h2 class="title f-40 bold">{{ content.mainTitle }}</h2>
-    <div class="description  mt-20" v-html="content.description"></div>
+    <div class="description  mt-20 f-18" v-html="content.description"></div>
     <compensation-list :data="compensationListData"/>
   </div>
 </template>
@@ -17,7 +17,7 @@ export default {
         mainTitle: 'Quam Tristique Condimentum',
         description: '<span>Duis mollis, est non commodo luctus, nisi erat porttitor ligula,' +
             ' eget lacinia odio sem nec elit. Cum sociis natoque penatibus et magnis dis ' +
-            'parturient montes, nascetur ridiculus mus. <a>Curabitur blandit<a/> tempus porttitor.' +
+            'parturient montes, nascetur ridiculus mus. <a>Curabitur blandit</a> tempus porttitor.' +
             ' Integer posuere erat a ante venenatis dapibus posuere velit aliquet. ' +
             'Vestibulum id ligula porta felis euismod semper.</span>  ',
 
@@ -60,22 +60,28 @@ export default {
 }
 </script>
 
-
 <style scoped lang="scss">
 .compensation-calculator-content {
   .title {
     line-height: 50px;
     letter-spacing: -0.02em;
+    @include mq(mobile) {
+      line-height: 43px;
+    }
   }
 
-  .description {
-    font-size: 18px;
+  .description::v-deep {
     line-height: 30px;
-    margin-top: 20px;
+    @include mq(mobile) {
+      line-height: 24px;
+    }
+
+    a {
+      color: $red;
+      text-decoration: underline;
+      cursor: pointer;
+    }
   }
 
-  &__down {
-
-  }
 }
 </style>

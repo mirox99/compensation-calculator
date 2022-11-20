@@ -2,10 +2,12 @@
   <div class="calculator-checkbox mt-20">
     <label class="calculator-checkbox__inner f-14">
       <span class="f-14">{{ label }}</span>
-      <input class="input" type="checkbox">
-      <div class="checkmark">
+      <input class="input"
+             v-model="model"
+             type="checkbox">
+      <span class="checkmark">
         <img src="../assets/images/check.svg" class="icon" alt="">
-      </div>
+      </span>
     </label>
   </div>
 </template>
@@ -22,8 +24,8 @@ export default {
       required: true
     },
     value: {
-      type: Number,
-      default: 0
+      type: Boolean,
+      default: false
     }
   },
   computed: {
@@ -90,7 +92,7 @@ export default {
         position: absolute;
         right: 0;
         top: 3px;
-        transition: all .45s cubic-bezier(.23, -0.01, .21, 1);
+        transition: all .45s $easeIn;
         opacity: 0;
         transform: translateY(3px);
       }

@@ -28,5 +28,11 @@ export default {
   text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.4);
   line-height: 20px;
   border-radius: 30px;
+  transition: all .45s $easeIn;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 1px 5px 14px 0 rgba($metalDark,0.75);
+  }
 }
 </style>
