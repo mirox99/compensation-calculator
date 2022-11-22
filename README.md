@@ -1,7 +1,10 @@
 # compensation-calculator
 ```
-implemented compensation calculator with vue, vuex 
-implemented unit tests using jest
+implemented compensation calculator with vue, vuex.
+implemented unit tests using jest.
+
+you can calculate your sick-leave health insurance compensation
+so that you can double check your compensation sum.
 ```
 ## Project setup
 ```
