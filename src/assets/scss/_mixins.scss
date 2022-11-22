@@ -1,0 +1,26 @@
+@mixin mq($title) {
+    @if $title ==desktop-sm {
+        @media (max-width: 1650px) {
+            @content;
+        }
+    }
+
+    @else if $title ==tablet {
+        @media (max-width: 1279px)  {
+            @content;
+        }
+    }
+
+    @else if $title ==tablet-sm {
+        @media (max-width: 1023px) {
+            @content;
+        }
+    }
+
+    @else if $title ==mobile {
+        @media (max-width: 767px) {
+            @content;
+        }
+    }
+}
+

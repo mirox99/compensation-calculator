@@ -1,0 +1,45 @@
+.f-40 {
+  font-size: 40px;
+  @include mq(mobile) {
+    font-size: 34px;
+  }
+}
+
+.f-32 {
+  font-size: 32px;
+  @include mq(mobile) {
+    font-size: 28px;
+  }
+}
+
+.f-24 {
+  font-size: 24px;
+}
+
+.f-18 {
+  font-size: 18px;
+  @include mq(mobile) {
+    font-size: 16px;
+  }
+}
+
+.f-14 {
+  font-size: 14px;
+}
+
+.f-12 {
+  font-size: 12px;
+}
+
+
+// <================================ FONT WEIGHT
+
+.bold {
+  font-weight: 700;
+}
+
+.regular {
+  font-weight: 400;
+}
+
+

@@ -1,18 +1,21 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <router-link
+        class="bold f-32"
+        to="/compensation-calculator">Compensation Calculator
+    </router-link>
   </div>
 </template>
 
-<script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+<style lang="scss" scoped>
+.home {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
 
-export default {
-  name: 'HomeView',
-  components: {
-    HelloWorld
+  a {
+    color: $white;
   }
 }
-</script>
+</style>
