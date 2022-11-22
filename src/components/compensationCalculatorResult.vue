@@ -31,7 +31,7 @@
       </div>
     </div>
     <div class="compensation-calculator-result__total mt-40 pseudo-line">
-      <div class="title line-15 flex f-14">Compensation total for
+      <div class="title line-15 flex-center f-14">Compensation total for
         <text-transition :value="sickLeaveDays"/>
         days (net)
       </div>
@@ -66,7 +66,7 @@ export default {
         currency: 'EUR',
       });
 
-      return formatter.format(value).replace(/ /g, '')
+      return formatter.format(value).replace(/\s/g, "")
     }
   },
   computed: {
