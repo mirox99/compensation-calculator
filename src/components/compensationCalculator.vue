@@ -7,8 +7,10 @@
         :id="item.id"
         :key="item.id"
         :type="item.type"
+        :error="item.error"
         :restrictValue="item.restrictValue"
         v-model="item.model"
+        @input="setErrors(item)"
     />
     <calculator-checkbox label="I have tuberculosis"
                          @input="checkBoxEvent"
@@ -26,26 +28,30 @@ import calculatorCheckbox from "@/components/calculatorCheckbox";
 import compensationCalculatorResult from "@/components/compensationCalculatorResult";
 import {mapActions, mapGetters} from "vuex";
 import minMax from "@/mixins/minMax";
+import {
+  INSURANCE_MAXIMUM_DURATION,
+  INSURANCE_MAXIMUM_DURATION_WITH_TUBERCULOSIS
+} from "@/constants/calculator-constants";
 
 export default {
   mixins: [minMax],
   data() {
     return {
-      insuranceMaximumDuration: 182,
-      insuranceMaximumDurationWithTuberculosis: 240,
       inputs: [
         {
           label: 'Average income',
           id: 'income',
           type: "€",
-          model: 0
+          model: 0,
+          error: false
         },
         {
           label: 'Days on sick-leave',
           id: 'sickLeaveDays',
           type: "days",
           model: 0,
-          restrictValue: this.sickDaysRestriction
+          restrictValue: this.sickDaysRestriction,
+          error: false
         },
       ]
     }
@@ -61,6 +67,9 @@ export default {
       calculatorData: 'compensationCalculator/calculatorData',
       tuberculosis: 'compensationCalculator/tuberculosis'
     }),
+    isFormValidate() {
+      return this.inputs.filter(item => item.model)?.length === this.inputs.length
+    }
   },
   methods: {
     ...mapActions({
@@ -68,10 +77,28 @@ export default {
       setTuberculosis: 'compensationCalculator/setTuberculosis'
     }),
     sickDaysRestriction(value) {
-      return this.tuberculosis ? this.minMax(value, 0, this.insuranceMaximumDurationWithTuberculosis) :
-          this.minMax(value, 0, this.insuranceMaximumDuration)
+      return this.tuberculosis ? this.minMax(value, 0, INSURANCE_MAXIMUM_DURATION_WITH_TUBERCULOSIS) :
+          this.minMax(value, 0, INSURANCE_MAXIMUM_DURATION)
+    },
+    setErrors(inputItem) {
+      if (inputItem) {
+        if (inputItem?.error === true && inputItem.model) inputItem.error = false
+        if (!inputItem.model) inputItem.error = true
+
+        return
+      }
+
+      this.inputs?.forEach(item => {
+        if (!item.model) item.error = true
+      })
     },
     calculate() {
+      if (!this.isFormValidate) {
+        this.setErrors()
+
+        return
+      }
+
       let calculatorData = this.inputs.map(item => item.id).reduce((accumulator, value, index) => {
         return {...accumulator, [value]: this.inputs[index].model};
       }, {});
@@ -83,7 +110,7 @@ export default {
 
       let daysInput = this.inputs[1]
 
-      if (daysInput.model && daysInput.model === this.insuranceMaximumDurationWithTuberculosis)
+      if (daysInput.model && daysInput.model === INSURANCE_MAXIMUM_DURATION_WITH_TUBERCULOSIS)
         daysInput.model = this.sickDaysRestriction(daysInput.model)
     }
   }

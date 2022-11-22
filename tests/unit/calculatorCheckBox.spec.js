@@ -1,7 +1,6 @@
 import {mount} from '@vue/test-utils'
 import Foo from '@/components/calculatorCheckBox'
 
-
 describe('calculatorButton.vue', () => {
     const wrapper = mount(Foo, {
         propsData: {
@@ -25,9 +24,6 @@ describe('calculatorButton.vue', () => {
         expect(checkbox.element.checked).toBeTruthy()
         expect(wrapper.emitted().input).toBeTruthy()
         expect(wrapper.emitted().input[0][0]).toEqual(true)
-        await wrapper.vm.$nextTick()
-
-        expect(wrapper.vm.model).toBe(true)
     })
 })
 

@@ -1,8 +1,8 @@
 <template>
   <div class="calculator-input mt-20">
     <label class="f-14" :for="id">{{ label }}</label>
-    <div class="calculator-input__inner mt-5">
-      <input class="input p-10"
+    <div :class="{error}" class="calculator-input__inner mt-5">
+      <input class="input"
              type="number"
              :id="id"
              v-model="model"
@@ -31,8 +31,10 @@ export default {
     value: {
       type: [Number, String],
     },
-    restrictValue: {
-      type: Function
+    restrictValue: Function,
+    error: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
@@ -66,6 +68,11 @@ export default {
     background-clip: content-box, border-box;
     border: 2px solid transparent;
     border-radius: 4px;
+    transition: background-image .45s $easeIn;
+
+    &.error {
+      background-image: linear-gradient(white, white), $redGradient;
+    }
 
     .input {
       background: transparent;
@@ -73,6 +80,7 @@ export default {
       width: 100%;
       border: unset;
       -moz-appearance: textfield;
+      padding: 10px 29px 10px 10px;
 
       &::-webkit-inner-spin-button, &::-webkit-outer-spin-button {
         -webkit-appearance: none;
